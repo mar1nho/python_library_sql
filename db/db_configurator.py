@@ -1,14 +1,19 @@
 import mysql.connector
 
+# O usuário deve ter a permissão de utilizar o banco de dados selecionado.
+host = 'localhost' # Ou o endereço IP do seu servidor MySQL
+user = 'pythonlearning' # Seu nome de usuário do MySQL
+password = 'pythondbpassword' # Sua senha do MySQL
+database = 'library_python' # O nome do seu banco de dados
 
 def connect():
     try:
         mydb = mysql.connector.connect(
-            # O usuário deve ter a permissão de utilizar o banco de dados selecionado.
-            host="localhost",  # Ou o endereço IP do seu servidor MySQL
-            user="pythonlearning",  # Seu nome de usuário do MySQL
-            password="pythondbpassword",  # Sua senha do MySQL
-            database="library_python"  # O nome do seu banco de dados
+
+            host=host,
+            user=user,
+            password=password,
+            database=database
         )
         print("Conexão ao MySQL estabelecida com sucesso!")
         return mydb
@@ -42,6 +47,3 @@ def create_table():
             cursor.close()
             print("Conexão fechada!")
 
-
-if __name__ == "__main__":
-    create_table()
