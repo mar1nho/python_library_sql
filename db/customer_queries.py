@@ -22,3 +22,20 @@ def insert_customer_data(connector, customer):
             cursor.close()
     else:
         print('Database connection failed.')
+
+def find_all_customers(connector):
+    table_name = "customer"
+    if connector:
+        cursor = connector.cursor()
+        try:
+            query = f"SELECT * FROM {table_name}"
+            cursor.execute(query)
+            customers = cursor.fetchall()
+            connector.commit()
+            return customers
+        except mysql.connector.Error as error:
+            print(f'Error finding customer from Database')
+            connector.rollback()
+        finally:
+            cursor.close()
+
